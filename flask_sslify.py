@@ -4,10 +4,13 @@ from flask import request, redirect
 
 class SSLify(object):
 
-    def __init__(self, app):
+    def __init__(self, app, age=31536000, subdomains=False):
 
         if app is not None:
             self.app = app
+            self.hsts_age = age
+            self.hsts_include_subdomains = subdomains
+
             self.init_app(self.app)
         else:
             self.app = None
@@ -28,7 +31,12 @@ class SSLify(object):
             r = redirect(url)
 
             # HSTS policy.
-            r.headers['Strict-Transport-Security'] = 'max-age=31536000'
+            hsts_policy = 'max-age={0}'.format(self.hsts_age)
+
+            if self.hsts_include_subdomains:
+                hsts_policy += '; includeSubDomains'
+
+            r.headers['Strict-Transport-Security'] = hsts_policy
 
             return r
 

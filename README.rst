@@ -30,6 +30,23 @@ If you make an HTTP request, it will automatically redirect::
     Strict-Transport-Security: max-age=31536000
     Connection: keep-alive
 
+
+HTTP Strict Transport Security
+------------------------------
+
+Flask-SSLify also provides your application with an HSTS policy.
+
+By default, HSTS is set for on year (31536000 seconds).
+
+You can change the duration by passing the `age` parameter::
+
+    sslify = SSLify(app, age=300)
+
+If you'd like to include subdomains in your HSTS policy, set the `subdomains` parameter::
+
+    sslify = SSLify(app, subdomains=True)
+
+
 Install
 -------
 
