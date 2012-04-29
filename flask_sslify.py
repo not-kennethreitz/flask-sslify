@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
+YEAR_IN_SECS = 31536000
 from flask import request, redirect
 
 class SSLify(object):
     """Secures your Flask App."""
 
-    def __init__(self, app, age=31536000, subdomains=False):
+    def __init__(self, app, age=YEAR_IN_SECS, subdomains=False):
         if app is not None:
             self.app = app
             self.hsts_age = age
