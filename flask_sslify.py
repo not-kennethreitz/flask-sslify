@@ -4,15 +4,17 @@ from flask import current_app as app
 from flask import request, redirect
 
 class SSLify(object):
+
     def __init__(self, app):
-        self.app = app
 
-        self.install_sslify(self.app)
+        if app is not None:
+            self.app = app
+            self.init_app(self.app)
+        else:
+            self.app = None
 
-    @classmethod
-    def install_sslify(cls, app):
-
-        app.before_request(cls.redirect)
+    def init_app(self, app):
+        app.before_request(self.redirect)
 
     @staticmethod
     def redirect():
