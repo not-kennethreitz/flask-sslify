@@ -43,7 +43,6 @@ class SSLify(object):
             url = request.url.replace('http://', 'https://')
             r = redirect(url)
 
-            r.headers['Strict-Transport-Security'] = self.hsts_header
             return r
 
     def set_hsts_header(self, response):
