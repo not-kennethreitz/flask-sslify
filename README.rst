@@ -22,14 +22,13 @@ If you make an HTTP request, it will automatically redirect::
 
     $ curl -I http://secure-samurai.herokuapp.com/
     HTTP/1.1 302 FOUND
-    Server: gunicorn/0.14.2
-    Date: Sun, 29 Apr 2012 21:32:00 GMT
-    Connection: keep-alive
+    Content-length: 281
     Content-Type: text/html; charset=utf-8
-    Content-Length: 253
+    Date: Sun, 29 Apr 2012 21:39:36 GMT
     Location: https://secure-samurai.herokuapp.com/
+    Server: gunicorn/0.14.2
     Strict-Transport-Security: max-age=31536000
-
+    Connection: keep-alive
 
 Install
 -------
