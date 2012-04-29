@@ -18,7 +18,7 @@ Usage is pretty simple::
     sslify = SSLify(app)
 
 
-If you make an HTTP request, it will automatically redirect:
+If you make an HTTP request, it will automatically redirect::
 
     $ curl http://127.0.0.1:5000
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
