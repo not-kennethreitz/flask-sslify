@@ -20,11 +20,15 @@ Usage is pretty simple::
 
 If you make an HTTP request, it will automatically redirect::
 
-    $ curl http://127.0.0.1:5000
-    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-    <title>Redirecting...</title>
-    <h1>Redirecting...</h1>
-    <p>You should be redirected automatically to target URL: <a href="https://127.0.0.1:5000/">https://127.0.0.1:5000/</a>.  If not click the link.%
+    $ curl -I http://secure-samurai.herokuapp.com/
+    HTTP/1.1 302 FOUND
+    Server: gunicorn/0.14.2
+    Date: Sun, 29 Apr 2012 21:32:00 GMT
+    Connection: keep-alive
+    Content-Type: text/html; charset=utf-8
+    Content-Length: 253
+    Location: https://secure-samurai.herokuapp.com/
+    Strict-Transport-Security: max-age=31536000
 
 
 Install
