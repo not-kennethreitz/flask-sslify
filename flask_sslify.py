@@ -16,6 +16,13 @@ class SSLify(object):
 
     @staticmethod
     def redirect():
-        if (not request.is_secure) and (not app.debug):
+
+        criteria = [
+            request.is_secure,
+            app.debug,
+            request.headers.get('X-Forwarded-Proto', 'http') == 'https'
+        ]
+
+        if not any(criteria):
             url = request.url.replace('http://', 'https://')
             return redirect(url)
