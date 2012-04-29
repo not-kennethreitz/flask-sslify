@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from flask import current_app as app
 from flask import request, redirect
 
 class SSLify(object):
@@ -16,12 +15,11 @@ class SSLify(object):
     def init_app(self, app):
         app.before_request(self.redirect)
 
-    @staticmethod
-    def redirect():
+    def redirect(self):
 
         criteria = [
             request.is_secure,
-            app.debug,
+            self.app.debug,
             request.headers.get('X-Forwarded-Proto', 'http') == 'https'
         ]
 
