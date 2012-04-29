@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-YEAR_IN_SECS = 31536000
 from flask import request, redirect
+
+YEAR_IN_SECS = 31536000
+
 
 class SSLify(object):
     """Secures your Flask App."""
