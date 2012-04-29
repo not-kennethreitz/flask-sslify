@@ -25,4 +25,11 @@ class SSLify(object):
 
         if not any(criteria):
             url = request.url.replace('http://', 'https://')
-            return redirect(url)
+            r = redirect(url)
+
+            # HSTS policy.
+            r.headers['Strict-Transport-Security'] = 'max-age=31536000'
+
+            return r
+
+
