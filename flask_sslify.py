@@ -43,10 +43,11 @@ class SSLify(object):
         ]
 
         if not any(criteria):
-            url = request.url.replace('http://', 'https://')
-            r = redirect(url)
+            if request.url.startswith('http://'):
+                url = request.url.replace('http://', 'https://', 1)
+                r = redirect(url)
 
-            return r
+                return r
 
     def set_hsts_header(self, response):
         """Adds HSTS header to each response."""
