@@ -51,7 +51,8 @@ class SSLify(object):
 
     def set_hsts_header(self, response):
         """Adds HSTS header to each response."""
-        response.headers.setdefault('Strict-Transport-Security', self.hsts_header)
+        if request.is_secure:
+            response.headers.setdefault('Strict-Transport-Security', self.hsts_header)
         return response
 
 
