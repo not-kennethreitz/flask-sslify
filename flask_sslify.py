@@ -53,6 +53,3 @@ class SSLify(object):
         """Adds HSTS header to each response."""
         response.headers.setdefault('Strict-Transport-Security', self.hsts_header)
         return response
-
-
-
