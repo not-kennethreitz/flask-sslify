@@ -8,11 +8,12 @@ YEAR_IN_SECS = 31536000
 class SSLify(object):
     """Secures your Flask App."""
 
-    def __init__(self, app, age=YEAR_IN_SECS, subdomains=False):
+    def __init__(self, app, age=YEAR_IN_SECS, subdomains=False, permanent=False):
         if app is not None:
             self.app = app
             self.hsts_age = age
             self.hsts_include_subdomains = subdomains
+            self.permanent = permanent
 
             self.init_app(self.app)
         else:
@@ -45,7 +46,10 @@ class SSLify(object):
         if not any(criteria):
             if request.url.startswith('http://'):
                 url = request.url.replace('http://', 'https://', 1)
-                r = redirect(url)
+                code = 302
+                if self.permanent:
+                    code = 301
+                r = redirect(url, code=code)
 
                 return r
 
