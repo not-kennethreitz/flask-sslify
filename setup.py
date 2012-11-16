@@ -12,7 +12,7 @@ from setuptools import setup
 
 setup(
     name='Flask-SSLify',
-    version='0.1.3',
+    version='0.1.4',
     url='https://github.com/kennethreitz/flask-sslify',
     license='BSD',
     author='Kenneth Reitz',
