@@ -38,13 +38,22 @@ Flask-SSLify also provides your application with an HSTS policy.
 
 By default, HSTS is set for on year (31536000 seconds).
 
-You can change the duration by passing the `age` parameter::
+You can change the duration by passing the ``age`` parameter::
 
     sslify = SSLify(app, age=300)
 
-If you'd like to include subdomains in your HSTS policy, set the `subdomains` parameter::
+If you'd like to include subdomains in your HSTS policy, set the ``subdomains`` parameter::
 
     sslify = SSLify(app, subdomains=True)
+
+
+HTTP 301 Redirects
+------------------
+
+By default, the redirect is issued with a HTTP 302 response. You can change that to a HTTP 301 response
+by passing the ``permanent`` parameter::
+
+    sslify = SSLify(app, permanent=True)
 
 
 Install
