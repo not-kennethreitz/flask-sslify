@@ -9,14 +9,12 @@ class SSLify(object):
     """Secures your Flask App."""
 
     def __init__(self, app=None, age=YEAR_IN_SECS, subdomains=False, permanent=False):
-        if app is not None:
-            self.hsts_age = age
-            self.hsts_include_subdomains = subdomains
-            self.permanent = permanent
+        self.hsts_age = age
+        self.hsts_include_subdomains = subdomains
+        self.permanent = permanent
 
+        if app is not None:
             self.init_app(self.app)
-        else:
-            self.app = None
 
     def init_app(self, app):
         """Configures the configured Flask app to enforce SSL."""
