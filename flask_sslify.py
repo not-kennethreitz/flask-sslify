@@ -10,7 +10,6 @@ class SSLify(object):
 
     def __init__(self, app=None, age=YEAR_IN_SECS, subdomains=False, permanent=False):
         if app is not None:
-            self.app = app
             self.hsts_age = age
             self.hsts_include_subdomains = subdomains
             self.permanent = permanent
