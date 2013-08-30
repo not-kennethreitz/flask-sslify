@@ -36,7 +36,7 @@ HTTP Strict Transport Security
 
 Flask-SSLify also provides your application with an HSTS policy.
 
-By default, HSTS is set for on year (31536000 seconds).
+By default, HSTS is set for *one year* (31536000 seconds).
 
 You can change the duration by passing the ``age`` parameter::
 
