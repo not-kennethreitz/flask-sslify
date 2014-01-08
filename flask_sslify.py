@@ -14,7 +14,7 @@ class SSLify(object):
         self.permanent = permanent
 
         if app is not None:
-            self.init_app(self.app)
+            self.init_app(app)
 
     def init_app(self, app):
         """Configures the configured Flask app to enforce SSL."""
