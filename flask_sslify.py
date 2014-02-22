@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import request, redirect
+from flask import request, redirect, current_app
 
 YEAR_IN_SECS = 31536000
 
@@ -19,7 +19,6 @@ class SSLify(object):
     def init_app(self, app):
         """Configures the configured Flask app to enforce SSL."""
 
-        self.app = app
         app.before_request(self.redirect_to_ssl)
         app.after_request(self.set_hsts_header)
 
@@ -38,7 +37,7 @@ class SSLify(object):
         # Should we redirect?
         criteria = [
             request.is_secure,
-            self.app.debug,
+            current_app.debug,
             request.headers.get('X-Forwarded-Proto', 'http') == 'https'
         ]
 
