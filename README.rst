@@ -62,3 +62,15 @@ Install
 Installation is simple too::
 
     $ pip install Flask-SSLify
+    
+    
+Security consideration using basic auth
+---------------------------------------
+
+When using basic auth, it is important that the redirect occurs before the user is prompted for
+credentials. Flask-SSLify registers a ``before_request`` handler, to make sure this handler gets
+executed before credentials are entered it is advisable to not prompt for any authentication
+inside a ``before_request`` handler.
+
+The example found at http://flask.pocoo.org/snippets/8/ works nicely, as the view function's
+decorator will never have an effect before the ``before_request`` hooks are executed.
