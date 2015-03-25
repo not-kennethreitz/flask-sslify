@@ -4,6 +4,7 @@ from flask import request, redirect
 
 YEAR_IN_SECS = 31536000
 
+
 class SSLify(object):
     """Secures your Flask App."""
 
@@ -51,7 +52,6 @@ class SSLify(object):
             request.headers.get('X-Forwarded-Proto', 'http') == 'https'
         ]
 
-        # if not any(criteria) and self.skipping != True:
         if not any(criteria) and not self.skipping is True:
             if request.url.startswith('http://'):
                 url = request.url.replace('http://', 'https://', 1)
@@ -64,7 +64,6 @@ class SSLify(object):
     def set_hsts_header(self, response):
         """Adds HSTS header to each response."""
         # Should we add STS header?
-        if not self.skipping is True:
+        if request.is_secure and not self.skipping is True:
             response.headers.setdefault('Strict-Transport-Security', self.hsts_header)
         return response
-
