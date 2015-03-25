@@ -56,6 +56,14 @@ by passing the ``permanent`` parameter::
     sslify = SSLify(app, permanent=True)
 
 
+Exclude Certain Paths from Being Redirected
+-------------------------------------------
+ You can exlude a path that starts with given string by including a list called ``skips``::
+ 
+     sslify = SSLify(app, skips=['mypath', 'anotherpath'])
+
+Or by including SSL_SKIPS in your app's config.
+
 Install
 -------
 
