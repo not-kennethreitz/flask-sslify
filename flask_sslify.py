@@ -40,6 +40,7 @@ class SSLify(object):
             for skip in self.skip_list:
                 if request.path.startswith('/{0}'.format(skip)):
                     return True
+        return False
 
     def redirect_to_ssl(self):
         """Redirect incoming requests to HTTPS."""
