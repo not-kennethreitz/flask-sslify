@@ -12,13 +12,13 @@ class SSLify(object):
         self.app = app or current_app
         self.hsts_age = age
 
-        self.app.config.setdefault('SSL_SUBDOMAINS', False)
-        self.app.config.setdefault('SSL_PERMANENT', False)
-        self.app.config.setdefault('SSL_SKIPS', None)
+        self.app.config.setdefault('SSLIFY_SUBDOMAINS', False)
+        self.app.config.setdefault('SSLIFY_PERMANENT', False)
+        self.app.config.setdefault('SSLIFY_SKIPS', None)
 
-        self.hsts_include_subdomains = subdomains or self.app.config['SSL_SUBDOMAINS']
-        self.permanent = permanent or self.app.config['SSL_PERMANENT']
-        self.skip_list = skips or self.app.config['SSL_SKIPS']
+        self.hsts_include_subdomains = subdomains or self.app.config['SSLIFY_SUBDOMAINS']
+        self.permanent = permanent or self.app.config['SSLIFY_PERMANENT']
+        self.skip_list = skips or self.app.config['SSLIFY_SKIPS']
 
         if app is not None:
             self.init_app(app)
