@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import request, redirect
+from flask import request, redirect, current_app
 
 YEAR_IN_SECS = 31536000
 
@@ -10,6 +10,7 @@ class SSLify(object):
 
     def __init__(self, app, age=YEAR_IN_SECS, subdomains=False, permanent=False, skips=None):
         if app is not None:
+            self.init_app(app)
             self.app = app
             self.hsts_age = age
             self.hsts_include_subdomains = subdomains or app.config.get('SSL_SUBDOMAINS')
@@ -48,7 +49,7 @@ class SSLify(object):
         # Should we redirect?
         criteria = [
             request.is_secure,
-            self.app.debug,
+            current_app.debug,
             request.headers.get('X-Forwarded-Proto', 'http') == 'https'
         ]
 
