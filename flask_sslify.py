@@ -9,12 +9,12 @@ class SSLify(object):
     """Secures your Flask App."""
 
     def __init__(self, app, age=YEAR_IN_SECS, subdomains=False, permanent=False, skips=None):
-        if app is not None:
+        if app is not None and not app.config.get('SSL_NO_REDIRECTS'):
             self.app = app
             self.hsts_age = age
-            self.hsts_include_subdomains = subdomains
-            self.permanent = permanent
-            self.skip_list = skips or app.config['SSL_SKIPS']
+            self.hsts_include_subdomains = subdomains or app.config.get('SSL_SUBDOMAINS')
+            self.permanent = permanent or app.config.get('SSL_PERMANENT')
+            self.skip_list = skips or app.config.get('SSL_SKIPS')
             self.init_app(self.app)
         else:
             self.app = None
@@ -35,10 +35,13 @@ class SSLify(object):
         return hsts_policy
 
     @property
-    def skipping(self):
+    def skip(self):
         """Checks the skip list."""
         # Should we skip?
-        if self.skip_list:
+        if self.skip_list: 
+            if isinstance(self.skip_list, basestring):
+                if request.path.startswith('/' + skip):
+                    return True
             for skip in self.skip_list:
                 if request.path.startswith('/' + skip):
                     return True
@@ -52,7 +55,7 @@ class SSLify(object):
             request.headers.get('X-Forwarded-Proto', 'http') == 'https'
         ]
 
-        if not any(criteria) and not self.skipping is True:
+        if not any(criteria) and not self.skip is True:
             if request.url.startswith('http://'):
                 url = request.url.replace('http://', 'https://', 1)
                 code = 302
@@ -64,6 +67,6 @@ class SSLify(object):
     def set_hsts_header(self, response):
         """Adds HSTS header to each response."""
         # Should we add STS header?
-        if request.is_secure and not self.skipping is True:
+        if request.is_secure and not self.skip:
             response.headers.setdefault('Strict-Transport-Security', self.hsts_header)
         return response
