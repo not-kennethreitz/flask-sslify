@@ -9,10 +9,11 @@ class SSLify(object):
     """Secures your Flask App."""
 
     def __init__(self, app=None, age=YEAR_IN_SECS, subdomains=False, permanent=False, skips=None):
+        self.app = app or current_app
         self.hsts_age = age
-        self.hsts_include_subdomains = subdomains or app.config.get('SSL_SUBDOMAINS')
-        self.permanent = permanent or app.config.get('SSL_PERMANENT')
-        self.skip_list = skips or app.config.get('SSL_SKIPS')
+        self.hsts_include_subdomains = subdomains or self.app.config.get('SSL_SUBDOMAINS') or subdomains
+        self.permanent = permanent or self.app.config.get('SSL_PERMANENT') or permanent
+        self.skip_list = skips or self.app.config.get('SSL_SKIPS') or skips
 
         if app is not None:
             self.init_app(app)
@@ -36,7 +37,7 @@ class SSLify(object):
     def skip(self):
         """Checks the skip list."""
         # Should we skip?
-        if self.skip_list and not isinstance(self.skip_list, basestring): 
+        if self.skip_list and isinstance(self.skip_list, list): 
             for skip in self.skip_list:
                 if request.path.startswith('/{0}'.format(skip)):
                     return True
