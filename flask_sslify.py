@@ -15,8 +15,7 @@ class SSLify(object):
         self.skip_list = skips or app.config.get('SSL_SKIPS')
 
         if app is not None:
-            self.app = app
-            self.init_app(self.app)
+            self.init_app(app)
         else:
             self.app = None
 
