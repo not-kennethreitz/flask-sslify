@@ -55,7 +55,7 @@ class SSLify(object):
             request.headers.get('X-Forwarded-Proto', 'http') == 'https'
         ]
 
-        if not any(criteria) and not self.skip is True:
+        if not any(criteria) and not self.skip:
             if request.url.startswith('http://'):
                 url = request.url.replace('http://', 'https://', 1)
                 code = 302
