@@ -38,10 +38,7 @@ class SSLify(object):
     def skip(self):
         """Checks the skip list."""
         # Should we skip?
-        if self.skip_list: 
-            if isinstance(self.skip_list, basestring):
-                if request.path.startswith('/' + skip):
-                    return True
+        if self.skip_list and not isinstance(self.skip_list, basestring): 
             for skip in self.skip_list:
                 if request.path.startswith('/' + skip):
                     return True
