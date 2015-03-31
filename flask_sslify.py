@@ -16,8 +16,6 @@ class SSLify(object):
 
         if app is not None:
             self.init_app(app)
-        else:
-            self.app = None
 
     def init_app(self, app):
         """Configures the configured Flask app to enforce SSL."""
