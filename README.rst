@@ -70,12 +70,6 @@ You can exlude a path that starts with given string by including a list called `
 Or by including ``SSL_SKIPS`` in your app's config.
 
 
-Turn-off Redirects Completely 
-------------------------------
-Flask-SSLify won't run if ``DEBUG`` is ``True``, but you can also turn-off redirects completely by setting 
-``SSL_NO_REDIRECTS`` in your app's config which might be useful for things like testing, etc.
-
-
 Install
 -------
 

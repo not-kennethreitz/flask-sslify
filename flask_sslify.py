@@ -9,7 +9,7 @@ class SSLify(object):
     """Secures your Flask App."""
 
     def __init__(self, app, age=YEAR_IN_SECS, subdomains=False, permanent=False, skips=None):
-        if app is not None and not app.config.get('SSL_NO_REDIRECTS'):
+        if app is not None:
             self.app = app
             self.hsts_age = age
             self.hsts_include_subdomains = subdomains or app.config.get('SSL_SUBDOMAINS')
