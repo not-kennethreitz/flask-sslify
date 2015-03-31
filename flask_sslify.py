@@ -40,7 +40,7 @@ class SSLify(object):
         # Should we skip?
         if self.skip_list and not isinstance(self.skip_list, basestring): 
             for skip in self.skip_list:
-                if request.path.startswith('/' + skip):
+                if request.path.startswith('/{0}'.format(skip)):
                     return True
 
     def redirect_to_ssl(self):
