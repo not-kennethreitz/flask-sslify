@@ -47,6 +47,9 @@ If you'd like to include subdomains in your HSTS policy, set the ``subdomains`` 
     sslify = SSLify(app, subdomains=True)
 
 
+Or by including ``SSLIFY_SUBDOMAINS`` in your app's config.
+
+
 HTTP 301 Redirects
 ------------------
 
@@ -54,6 +57,17 @@ By default, the redirect is issued with a HTTP 302 response. You can change that
 by passing the ``permanent`` parameter::
 
     sslify = SSLify(app, permanent=True)
+
+Or by including ``SSLIFY_PERMANENT`` in your app's config.
+
+
+Exclude Certain Paths from Being Redirected
+-------------------------------------------
+You can exlude a path that starts with given string by including a list called ``skips``::
+ 
+     sslify = SSLify(app, skips=['mypath', 'anotherpath'])
+
+Or by including ``SSLIFY_SKIPS`` in your app's config.
 
 
 Install
