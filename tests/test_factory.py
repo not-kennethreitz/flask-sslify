@@ -59,5 +59,5 @@ def test_hsts_header(app_factory):
     client = app_factory.app.test_client()
     r = client.get('/', base_url='https://example.com')
     assert r.status_code == 200
-    assert r.data == 'home'
+    assert r.data.decode('utf-8') == 'home'
     assert r.headers['Strict-Transport-Security'] == 'max-age=31536000'
