@@ -12,19 +12,23 @@ class SSLify(object):
         self.app = app or current_app
         self.hsts_age = age
 
-        self.app.config.setdefault('SSLIFY_SUBDOMAINS', False)
-        self.app.config.setdefault('SSLIFY_PERMANENT', False)
-        self.app.config.setdefault('SSLIFY_SKIPS', None)
-
-        self.hsts_include_subdomains = subdomains or self.app.config['SSLIFY_SUBDOMAINS']
-        self.permanent = permanent or self.app.config['SSLIFY_PERMANENT']
-        self.skip_list = skips or self.app.config['SSLIFY_SKIPS']
+        self.hsts_include_subdomains = subdomains
+        self.permanent = permanent
+        self.skip_list = skips
 
         if app is not None:
             self.init_app(app)
 
     def init_app(self, app):
-        """Configures the configured Flask app to enforce SSL."""
+        """Configures the specified Flask app to enforce SSL."""
+        app.config.setdefault('SSLIFY_SUBDOMAINS', False)
+        app.config.setdefault('SSLIFY_PERMANENT', False)
+        app.config.setdefault('SSLIFY_SKIPS', None)
+
+        self.hsts_include_subdomains = self.hsts_include_subdomains or app.config['SSLIFY_SUBDOMAINS']
+        self.permanent = self.permanent or self.app.config['SSLIFY_PERMANENT']
+        self.skip_list = self.skip_list or self.app.config['SSLIFY_SKIPS']
+
         app.before_request(self.redirect_to_ssl)
         app.after_request(self.set_hsts_header)
 
