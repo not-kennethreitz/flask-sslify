@@ -4,6 +4,8 @@ Flask-SSLify
 This is a simple Flask extension that configures your Flask application to redirect
 all incoming requests to HTTPS.
 
+The extension is no longer maintained, prefer using `Flask-Talisman <https://github.com/GoogleCloudPlatform/flask-talisman>`_ as it is encouraged by the `Flask Security Guide <http://flask.pocoo.org/docs/dev/security/>`_.
+
 If you're interested in financially supporting Kenneth Reitz open source, consider `visiting this link <https://cash.me/$KennethReitz>`_. Your support helps tremendously with sustainability of motivation, as Open Source is no longer part of my day job.
 
 Redirects only occur when ``app.debug`` is ``False``.
